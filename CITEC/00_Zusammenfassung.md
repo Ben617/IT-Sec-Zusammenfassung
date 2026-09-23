@@ -8,6 +8,9 @@ Installation, Betrieb, Administration, aktuelle Versionen, allgemeine Probleme m
 [Kurzfassung](Citec-Kurzfassung/Windows-Kurzfassung.md)
 
 ## [Linux:]()
+
+
+
 Installation, Betrieb, Administration, aktuelle Versionen, allgemeine Probleme mit BS Linux hinsichtlich Distros (Debian, Suse, UNIX oder RedHat)
 [Kurzfassung](Citec-Kurzfassung/Linux-Kurzfassung.md)
 
