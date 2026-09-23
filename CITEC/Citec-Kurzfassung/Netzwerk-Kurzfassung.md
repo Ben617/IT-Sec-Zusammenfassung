@@ -5,16 +5,16 @@
 ## Netzwerkarten
 
 ## Netzwerkkomponenten
+## Netzwerkmodelle
+- OSI-Modell
 
-## OSI-Modell
-
-## TCP/IP-Modell
+- TCP/IP-Modell
 
 ## MAC-Adressen
 
-## IPv4-Adressen
-
-## IPv6-Adressen
+## IP-Adressen
+- v4
+- v6
 
 ## Subnetze und Subnetzmasken
 
@@ -81,6 +81,9 @@
 
 ### WPA2 und WPA3
 
+
+
+---
 ## Netzwerksicherheit
 
 ### Firewall
