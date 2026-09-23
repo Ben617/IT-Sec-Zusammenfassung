@@ -10,9 +10,51 @@ Netzwerkarten ermöglichen Geräten die Kommunikation und unterscheiden sich bei
 
 ## MAC-Adressen
 Eine MAC-Adresse ist die eindeutige Hardwareadresse einer Netzwerkschnittstelle, die zur Identifikation innerhalb eines lokalen Netzwerks dient.
+
 ## IP-Adressen
-- v4
-- v6
+
+IP-Adressen identifizieren Geräte in einem Netzwerk und ermöglichen die Kommunikation zwischen ihnen.
+
+* IPv4:
+
+  IPv4-Adressen bestehen aus 32 Bit und werden als vier Dezimalzahlen dargestellt.
+
+  ```text
+  192.168.1.25
+  ```
+
+  IPv4 verwendet **ARP (Address Resolution Protocol)**, um zu einer bekannten IPv4-Adresse die entsprechende MAC-Adresse im lokalen Netzwerk zu ermitteln.
+
+  ```bash
+  ip neighbor
+  ```
+
+* IPv6:
+
+  IPv6-Adressen bestehen aus 128 Bit und werden hexadezimal dargestellt.
+
+  ```text
+  2001:db8:1234::25
+  ```
+
+  IPv6 verwendet **NDP (Neighbor Discovery Protocol)** zur Ermittlung von MAC-Adressen sowie zur Erkennung von Nachbarn, Routern und Netzwerkparametern.
+
+  ```bash
+  ip -6 neighbor
+  ```
+
+* IP-Adressen unter Windows anzeigen:
+
+  ```powershell
+  ipconfig
+  ```
+
+* IP-Adressen unter Linux anzeigen:
+
+  ```bash
+  ip address
+  ```
+
 
 ## Subnetze und Subnetzmasken
 
@@ -75,9 +117,8 @@ netstat -ano
 ## Standardgateway
 Das Standardgateway ist normalerweise der Router, an den ein Gerät Daten sendet, wenn sich das Ziel außerhalb des eigenen Netzwerks befindet.
 
-## Ports und Protokolle
 
-## Standardgateway ermitteln
+- Standardgateway ermitteln
 
 Unter Windows:
 
