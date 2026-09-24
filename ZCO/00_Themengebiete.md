@@ -9,27 +9,27 @@
 - Rechnerarchitektur
 - Netzwerk/ Netzwerktechnik
 - Windows:
--- Windows-Server/Versionen
--- 
---
---
---
+    - Windows-Server/Versionen
+    - 
+    -
+    -
+    -
 - Unix:
---
---
---
---
+    -
+    -
+    -
+    -
 - Datenbanken/SQL
 - Prog-Sprachen: C, Python, perl, php, js, HTMl/CSS, MySQL, Oracle, MS SQL (min 2-3) 
 - CTF
 - Weitere:
--- Footprinting
--- Scanning
--- Forensik
--- Elektrotechnik
--- Hardware
--- Exploitation
---
+    - Footprinting
+    - Scanning
+    - Forensik
+    - Elektrotechnik
+    - Hardware
+    - Exploitation
+    -
 ## Quellen
 - Game of Open directory
 - HTB
