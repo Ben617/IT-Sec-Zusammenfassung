@@ -38,7 +38,9 @@
 ## Dateisystemforensik
 
 - FAT 
+
 Typischer Einsatz: USB-Sticks, Speicherkarten und ältere Systeme
+    
     - Grundbegriffe
         - FAT12, FAT16 und FAT32
         - Cluster und Clusterketten
@@ -67,7 +69,9 @@ Typischer Einsatz: USB-Sticks, Speicherkarten und ältere Systeme
         - Auswertung der Verzeichniseinträge
         - eingeschränkte Aussagekraft der Zeitstempel
 - NTFS 
+
 Typisches Dateisystem von Windows
+    
     -Grundlagen
         - Cluster und Logical Cluster Numbers
         - Dateien als Sammlung von Attributen
@@ -100,7 +104,9 @@ Typisches Dateisystem von Windows
         - Erkennung von Erstellung, Änderung, Umbenennung und Löschung
 
 - EXT4
+
 Typisches Dateisystem von Linux-Systemen
+    
     -Grundlagen
         - Blöcke und Blockgruppen
         - Inodes
