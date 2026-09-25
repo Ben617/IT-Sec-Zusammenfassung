@@ -1,5 +1,5 @@
 # Linux
-
+[Zurück](../00_Zusammenfassung.md)
 ## [Grundlagen und Architektur](Grundlagen_Architektur.md)
 
 ## [Distributionen, Installation und Einrichtung](Installation_Einrichtung.md)
