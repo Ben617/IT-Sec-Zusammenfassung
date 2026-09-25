@@ -1,0 +1,34 @@
+- NTFS
+
+    > Typisches Dateisystem von Windows
+    
+    -Grundlagen
+        - Cluster und Logical Cluster Numbers
+        - Dateien als Sammlung von Attributen
+    - Zentrale Strukturen:
+        - Master File Table ($MFT)
+        - MFT Mirror ($MFTMirr)
+        - Volume Bitmap ($Bitmap)
+        - Bootsektor ($Boot)
+        - Attribute wie $STANDARD_INFORMATION und $FILE_NAME
+        - Indexstrukturen ($INDEX_ROOT, $INDEX_ALLOCATION)
+    - Metadaten und Zeitstempel
+        - MACB-Zeitstempel
+        - unterschiedliche Zeitstempel in $STANDARD_INFORMATION und $FILE_NAME
+        - Eigentümer und Zugriffsrechte
+        - Alternate Data Streams (ADS)
+    - Gelöschte Dateien
+        - als frei markierte MFT-Einträge
+        - Wiederverwendung von MFT-Einträgen
+        - Wiederherstellung residenter und nicht-residenter Daten
+    - Nicht zugewiesener Speicher und Slack Space
+        - freie Cluster
+        - File Slack
+        - MFT Slack
+        - File Carving
+    - Journaling
+        - $LogFile
+        - $UsnJrnl
+    - Timeline-Erstellung
+        - Kombination von $MFT, $LogFile und $UsnJrnl
+        - Erkennung von Erstellung, Änderung, Umbenennung und Löschung

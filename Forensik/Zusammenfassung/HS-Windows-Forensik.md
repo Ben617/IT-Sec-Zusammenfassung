@@ -1,0 +1,50 @@
+# Windows Hauptspeicherforensik
+
+- Systemidentifikation
+  - Windows-Version und Build
+  - Kernel und Symbolinformationen
+  - Systemzeit und Startzeitpunkt
+- Prozesse und Threads
+  - aktive und beendete Prozesse
+  - Prozesshierarchie
+  - Kommandozeilenargumente
+  - versteckte Prozesse
+  - verdächtige Threads
+- Geladene Komponenten
+  - DLLs
+  - Kernelmodule und Treiber
+  - nicht verknüpfte oder versteckte Module
+- Speicherbereiche
+  - Virtual Address Descriptors (`VAD`)
+  - ausführbare Speicherbereiche
+  - Speicherberechtigungen
+  - Process Hollowing
+  - DLL- und Code-Injection
+- Handles und Objekte
+  - offene Dateien
+  - Registry-Schlüssel
+  - Mutexe
+  - Pipes
+  - Prozesse und Tokens
+- Netzwerkaktivitäten
+  - aktive und geschlossene Verbindungen
+  - offene Ports
+  - Sockets
+  - Zuordnung zu Prozessen
+- Benutzer- und Anmeldedaten
+  - angemeldete Benutzer
+  - Sitzungen
+  - Zugriffstokens
+  - Anmeldeartefakte
+  - gegebenenfalls im Speicher vorhandene Zugangsdaten
+- Malware- und Rootkit-Erkennung
+  - versteckte Prozesse
+  - manipulierte Kernelstrukturen
+  - injizierter Code
+  - verdächtige Treiber
+  - API-Hooking
+- Weitere Artefakte
+  - Konsolen- und Befehlsverläufe
+  - Zwischenablage
+  - Registry-Fragmente
+  - im Speicher befindliche Dateien

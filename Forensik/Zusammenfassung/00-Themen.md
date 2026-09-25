@@ -37,7 +37,7 @@
 
 ## Dateisystemforensik
 
-- FAT 
+- [FAT](FAT.md)
 
     > Typischer Einsatz: USB-Sticks, Speicherkarten und ältere Systeme
     
@@ -68,7 +68,7 @@
     - Timeline-Erstellung
         - Auswertung der Verzeichniseinträge
         - eingeschränkte Aussagekraft der Zeitstempel
-- NTFS 
+- [NTFS](NTFS.md)
 
     > Typisches Dateisystem von Windows
     
@@ -103,7 +103,7 @@
         - Kombination von $MFT, $LogFile und $UsnJrnl
         - Erkennung von Erstellung, Änderung, Umbenennung und Löschung
 
-- EXT4
+- [EXT4](EXT4.md)
 
     > Typisches Dateisystem von Linux-Systemen
     
@@ -207,107 +207,9 @@
   - MemProcFS
   - betriebsspezifische Erfassungswerkzeuge
 
-### Windows
+### [Windows](HS-Windows-Forensik.md)
 
-- Systemidentifikation
-  - Windows-Version und Build
-  - Kernel und Symbolinformationen
-  - Systemzeit und Startzeitpunkt
-- Prozesse und Threads
-  - aktive und beendete Prozesse
-  - Prozesshierarchie
-  - Kommandozeilenargumente
-  - versteckte Prozesse
-  - verdächtige Threads
-- Geladene Komponenten
-  - DLLs
-  - Kernelmodule und Treiber
-  - nicht verknüpfte oder versteckte Module
-- Speicherbereiche
-  - Virtual Address Descriptors (`VAD`)
-  - ausführbare Speicherbereiche
-  - Speicherberechtigungen
-  - Process Hollowing
-  - DLL- und Code-Injection
-- Handles und Objekte
-  - offene Dateien
-  - Registry-Schlüssel
-  - Mutexe
-  - Pipes
-  - Prozesse und Tokens
-- Netzwerkaktivitäten
-  - aktive und geschlossene Verbindungen
-  - offene Ports
-  - Sockets
-  - Zuordnung zu Prozessen
-- Benutzer- und Anmeldedaten
-  - angemeldete Benutzer
-  - Sitzungen
-  - Zugriffstokens
-  - Anmeldeartefakte
-  - gegebenenfalls im Speicher vorhandene Zugangsdaten
-- Malware- und Rootkit-Erkennung
-  - versteckte Prozesse
-  - manipulierte Kernelstrukturen
-  - injizierter Code
-  - verdächtige Treiber
-  - API-Hooking
-- Weitere Artefakte
-  - Konsolen- und Befehlsverläufe
-  - Zwischenablage
-  - Registry-Fragmente
-  - im Speicher befindliche Dateien
-
-### Linux
-
-- Systemidentifikation
-  - Distribution und Kernel-Version
-  - Kernel-Symbole
-  - Systemzeit und Startzeitpunkt
-- Prozesse und Threads
-  - aktive und beendete Prozesse
-  - Prozesshierarchie
-  - Kommandozeilenargumente
-  - Umgebungsvariablen
-  - versteckte Prozesse
-- Geladene Komponenten
-  - Shared Libraries
-  - Kernelmodule
-  - nicht verknüpfte oder versteckte Module
-- Speicherbereiche
-  - virtuelle Speicherbereiche (`VMAs`)
-  - Heap und Stack
-  - ausführbare Speicherbereiche
-  - Speicherberechtigungen
-  - Code-Injection
-- Dateisystem- und Kernelobjekte
-  - offene Dateien und Dateideskriptoren
-  - gemountete Dateisysteme
-  - Inode- und Dentry-Cache
-  - im Speicher befindliche Dateiinhalte
-- Netzwerkaktivitäten
-  - aktive Verbindungen
-  - offene Ports
-  - Sockets
-  - Zuordnung zu Prozessen
-  - Netzwerk-Namensräume
-- Benutzeraktivitäten
-  - aktive Sitzungen
-  - Shell-Prozesse
-  - Befehlszeilen
-  - Umgebungsvariablen
-  - SSH-bezogene Artefakte
-- Malware- und Rootkit-Erkennung
-  - versteckte Prozesse
-  - verdächtige Kernelmodule
-  - System-Call-Hooking
-  - manipulierte Kernelstrukturen
-  - injizierter Code
-- Container und Virtualisierung
-  - Containerprozesse
-  - Namespaces
-  - Control Groups (`cgroups`)
-  - Zuordnung von Prozessen zu Containern
+### [Linux](HS-Linux-Forensik.md)
 
 ### Gemeinsame Auswertung
 

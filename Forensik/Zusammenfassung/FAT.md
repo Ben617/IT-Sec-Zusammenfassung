@@ -1,0 +1,31 @@
+- FAT
+
+    > Typischer Einsatz: USB-Sticks, Speicherkarten und ältere Systeme
+    
+    - Grundbegriffe
+        - FAT12, FAT16 und FAT32
+        - Cluster und Clusterketten
+    - Zentrale Strukturen:
+        - Bootsektor
+        - BIOS Parameter Block (BPB)
+        - File Allocation Table
+        - FAT-Kopien
+        - Verzeichniseinträge
+        - Long File Names (LFN)
+        - FAT32: FSInfo-Sektor
+    - Metadaten und Zeitstempel
+        - Erstellungs-, Änderungs- und Zugriffszeit
+        - begrenzte Zeitstempelauflösung
+        - keine Benutzer- und Berechtigungsinformationen
+    - Gelöschte Dateien
+        - Kennzeichnung gelöschter Verzeichniseinträge
+        - Verlust des ersten Zeichens im Dateinamen
+        - Rekonstruktion von Clusterketten
+    - Nicht zugewiesener Speicher und Slack Space
+        - freie Cluster
+        - File Slack
+        - Dateifragmente
+        - File Carving
+    - Timeline-Erstellung
+        - Auswertung der Verzeichniseinträge
+        - eingeschränkte Aussagekraft der Zeitstempel

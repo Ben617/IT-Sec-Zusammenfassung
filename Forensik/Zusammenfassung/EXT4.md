@@ -1,0 +1,33 @@
+- EXT4
+
+    > Typisches Dateisystem von Linux-Systemen
+    
+    -Grundlagen
+        - Blöcke und Blockgruppen
+        - Inodes
+    - Zentrale Strukturen:
+        - Superblock
+        - Group Descriptor Table
+        - Inode-Tabellen
+        - Block- und Inode-Bitmaps
+        - Extents
+        - Verzeichniseinträge
+    - Metadaten und Zeitstempel
+        - Inode-Metadaten
+        - Berechtigungen, Eigentümer und Dateimodus
+        - mtime, atime, ctime und crtime
+        - Extended Attributes
+    - Gelöschte Dateien
+        - Freigabe von Inodes und Blöcken
+        - entfernte Verzeichniseinträge
+        - Rekonstruktion über Inodes und Journal
+    - Nicht zugewiesener Speicher und Slack Space
+        - freie Blöcke
+        - Block Slack
+        - File Carving
+    - Journaling
+        - JBD2-Journal
+        - Journalmodi
+        - Rekonstruktion früherer Metadaten
+    - Timeline-Erstellung
+        - Kombination aus Inodes, Verzeichniseinträgen und Journal

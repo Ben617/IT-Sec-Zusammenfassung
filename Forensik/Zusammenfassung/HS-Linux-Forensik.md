@@ -1,0 +1,50 @@
+# Linux Hauptspeicherforensik
+
+- Systemidentifikation
+  - Distribution und Kernel-Version
+  - Kernel-Symbole
+  - Systemzeit und Startzeitpunkt
+- Prozesse und Threads
+  - aktive und beendete Prozesse
+  - Prozesshierarchie
+  - Kommandozeilenargumente
+  - Umgebungsvariablen
+  - versteckte Prozesse
+- Geladene Komponenten
+  - Shared Libraries
+  - Kernelmodule
+  - nicht verknüpfte oder versteckte Module
+- Speicherbereiche
+  - virtuelle Speicherbereiche (`VMAs`)
+  - Heap und Stack
+  - ausführbare Speicherbereiche
+  - Speicherberechtigungen
+  - Code-Injection
+- Dateisystem- und Kernelobjekte
+  - offene Dateien und Dateideskriptoren
+  - gemountete Dateisysteme
+  - Inode- und Dentry-Cache
+  - im Speicher befindliche Dateiinhalte
+- Netzwerkaktivitäten
+  - aktive Verbindungen
+  - offene Ports
+  - Sockets
+  - Zuordnung zu Prozessen
+  - Netzwerk-Namensräume
+- Benutzeraktivitäten
+  - aktive Sitzungen
+  - Shell-Prozesse
+  - Befehlszeilen
+  - Umgebungsvariablen
+  - SSH-bezogene Artefakte
+- Malware- und Rootkit-Erkennung
+  - versteckte Prozesse
+  - verdächtige Kernelmodule
+  - System-Call-Hooking
+  - manipulierte Kernelstrukturen
+  - injizierter Code
+- Container und Virtualisierung
+  - Containerprozesse
+  - Namespaces
+  - Control Groups (`cgroups`)
+  - Zuordnung von Prozessen zu Containern
