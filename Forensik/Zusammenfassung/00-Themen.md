@@ -39,7 +39,7 @@
 
 - FAT 
 
-Typischer Einsatz: USB-Sticks, Speicherkarten und ältere Systeme
+    > Typischer Einsatz: USB-Sticks, Speicherkarten und ältere Systeme
     
     - Grundbegriffe
         - FAT12, FAT16 und FAT32
@@ -70,7 +70,7 @@ Typischer Einsatz: USB-Sticks, Speicherkarten und ältere Systeme
         - eingeschränkte Aussagekraft der Zeitstempel
 - NTFS 
 
-Typisches Dateisystem von Windows
+    > Typisches Dateisystem von Windows
     
     -Grundlagen
         - Cluster und Logical Cluster Numbers
@@ -105,7 +105,7 @@ Typisches Dateisystem von Windows
 
 - EXT4
 
-Typisches Dateisystem von Linux-Systemen
+    > Typisches Dateisystem von Linux-Systemen
     
     -Grundlagen
         - Blöcke und Blockgruppen
