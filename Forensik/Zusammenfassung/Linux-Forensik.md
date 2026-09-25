@@ -1,0 +1,60 @@
+# Linux
+
+- Systemidentifikation
+  - Distribution und Kernel-Version
+  - Hostname
+  - Zeitzone
+  - Installations- und Startzeitpunkt
+- Benutzer und Authentifizierung
+  - `/etc/passwd`
+  - `/etc/shadow`
+  - `/etc/group`
+  - `sudo`-Konfiguration
+  - SSH-Schlüssel
+  - erfolgreiche und fehlgeschlagene Anmeldungen
+- Systemprotokolle
+  - `systemd-journald`
+  - `/var/log/syslog`
+  - `/var/log/messages`
+  - `/var/log/auth.log`
+  - `/var/log/secure`
+  - `wtmp`, `btmp` und `lastlog`
+- Befehls- und Benutzeraktivitäten
+  - Bash- und Zsh-History
+  - zuletzt verwendete Dateien
+  - Benutzerkonfigurationen
+  - temporäre Dateien
+  - Desktop- und Anwendungsspuren
+- Prozesse, Dienste und Daemons
+  - systemd-Units
+  - aktive und deaktivierte Dienste
+  - Init-Skripte
+  - Prozessinformationen
+- Persistenzmechanismen
+  - Cronjobs
+  - systemd-Services und Timer
+  - Shell-Startdateien
+  - Autostart-Einträge
+  - manipulierte ausführbare Dateien
+- Software und Pakete
+  - installierte Pakete
+  - Paketmanager-Protokolle
+  - Installations- und Aktualisierungszeitpunkte
+  - manuell installierte Programme
+- Netzwerkspuren
+  - Netzwerkkonfiguration
+  - DNS-Einstellungen
+  - bekannte WLAN-Netzwerke
+  - SSH-Verbindungen
+  - Firewall-Regeln
+  - offene Ports und Netzwerkdienste
+- Geräte und Datenträger
+  - Mount-Historie
+  - `/etc/fstab`
+  - Kernel- und `udev`-Logs
+  - USB-Geräte
+- Sicherheitsartefakte
+  - `sudo`-Nutzung
+  - SELinux beziehungsweise AppArmor
+  - gelöschte oder manipulierte Logs
+  - Rootkits und verdächtige Kernelmodule

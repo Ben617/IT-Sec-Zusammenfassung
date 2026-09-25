@@ -1,0 +1,71 @@
+# Windows
+
+- Systemidentifikation
+  - Windows-Version und Build
+  - Computername
+  - Zeitzone
+  - Installationszeitpunkt
+  - letzte Start- und Herunterfahrzeiten
+- Windows Registry
+  - Registry-Hives
+    - `SYSTEM`
+    - `SOFTWARE`
+    - `SAM`
+    - `SECURITY`
+    - `NTUSER.DAT`
+    - `UsrClass.dat`
+  - Benutzer- und Systemeinstellungen
+  - Autostart-Einträge
+  - angeschlossene Geräte
+- Benutzer und Authentifizierung
+  - lokale Benutzer und Gruppen
+  - Benutzerprofile
+  - An- und Abmeldungen
+  - fehlgeschlagene Anmeldeversuche
+  - RDP-Anmeldungen
+- Windows Event Logs
+  - Security
+  - System
+  - Application
+  - PowerShell
+  - Windows Defender
+  - Ereignis-IDs
+- Programmausführung
+  - Prefetch
+  - Amcache
+  - Shimcache/AppCompatCache
+  - UserAssist
+  - BAM/DAM
+  - Jump Lists
+  - LNK-Dateien
+- Persistenzmechanismen
+  - Registry-Run-Keys
+  - Dienste
+  - geplante Aufgaben
+  - Autostartordner
+  - WMI-Persistenz
+- Benutzeraktivitäten
+  - zuletzt verwendete Dateien
+  - ShellBags
+  - Papierkorb
+  - Zwischenablage und Suchverlauf
+  - Browser- und Downloadspuren
+- Geräte und externe Datenträger
+  - USB-Geräte
+  - Laufwerksbuchstaben
+  - angeschlossene Speichermedien
+  - SetupAPI-Logs
+- Netzwerkspuren
+  - bekannte Netzwerke
+  - IP- und DNS-Konfiguration
+  - Firewall-Protokolle
+  - Netzwerkfreigaben
+  - RDP- und SMB-Spuren
+- Sicherheitsartefakte
+  - Windows Defender
+  - Firewall
+  - Ereignisprotokoll-Löschung
+  - deaktivierte Sicherheitsfunktionen
+
+
+
