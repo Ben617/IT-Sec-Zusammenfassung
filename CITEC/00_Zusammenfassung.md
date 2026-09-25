@@ -27,7 +27,7 @@ Installation, Betrieb, Updates, Adressierung, Protokolle und allgemeine Frageste
 Grundlagen, Strukturen, Logik und Spezialitäten von Webentwicklung mit HTML und CSS
 [Kurzfassung]()
 
-## [Informationssicherheit:] (Informationssicherheit/00_Zusammenfassung.md)
+## [Informationssicherheit:](Informationssicherheit/00_Zusammenfassung.md)
 Themen des IT-Grundschutzes, DSGVO und IT-Forensik im Hinblick auf Informationssicherheit
 [Kurzfassung]()
 
