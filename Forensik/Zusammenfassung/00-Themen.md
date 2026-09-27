@@ -2,7 +2,7 @@
 
 ## Datenerfassung und Beweissicherung
 
-## Datenträgerforensik
+## [Datenträgerforensik](Datenträgerforensik.md)
 - Datenträgeraufbau
     - Sektoren und Blöcke
     - physische und logische Blockadressierung
@@ -10,15 +10,7 @@
     - Advanced Format (4Kn, 512e)
 - Partitionierungsschemata
     - MBR/DOS
-        - Partitionstabelle
-        - primäre und erweiterte Partitionen
-        - Bootcode
     - GPT
-        - Protective MBR
-        - primärer und sekundärer GPT-Header
-        - Partitionseinträge und Prüfsummen
-        - Microsoft Reserved Partition (MSR)
-        - EFI-Systempartition (ESP)
 - Verborgene beziehungsweise nicht zugewiesene Bereiche
     - HPA - Host Protected Area
     - DCO - Device Configuration Overlay
@@ -135,6 +127,17 @@
 
 
 ## [Tools](Tools.md)
+- `dd`  
+- `sha256sum`  
+- `xxd`  
+- `file`  
+- `strings`  
+- The Sleuth Kit  
+- Autopsy  
+- Volatility 3  
+- ExifTool  
+- `fdisk`  
+- `parted`  
 
 
 
