@@ -123,7 +123,22 @@ aktive Partition, während `0x00` eine inaktive Partition kennzeichnet.
     Todo
 - **Partitionseinträge und Prüfsummen**  
   Die Partitionseinträge enthalten unter anderem Typ-GUID, eindeutige Partitions-GUID, Start- und End-LBA, Attribute und Partitionsname. CRC32-Prüfsummen schützen den GPT-Header und die Partitionseinträge und ermöglichen die Erkennung von Beschädigungen.
-    Todo
+  | Offset | Größe | Bytes | Feld | Dekodierter Wert |
+|---:|---:|---|---|---|
+| `0x00` | 8 Byte | `45 46 49 20 50 41 52 54` | GPT-Signatur | `EFI PART` |
+| `0x08` | 4 Byte | `00 00 01 00` | GPT-Version | `1.0` |
+| `0x0C` | 4 Byte | `5c 00 00 00` | Headergröße | 92 Byte |
+| `0x10` | 4 Byte | `8b c1 39 3b` | CRC32 des Headers | `0x3B39C18B` |
+| `0x14` | 4 Byte | `00 00 00 00` | Reserviert | `0` |
+| `0x18` | 8 Byte | `01 00 00 00 00 00 00 00` | Aktueller LBA | `1` |
+| `0x20` | 8 Byte | `ff 9f d5 01 00 00 00 00` | LBA des Backup-Headers | `30.777.343` |
+| `0x28` | 8 Byte | `22 00 00 00 00 00 00 00` | Erster nutzbarer LBA | `34` |
+| `0x30` | 8 Byte | `de 9f d5 01 00 00 00 00` | Letzter nutzbarer LBA | `30.777.310` |
+| `0x38` | 16 Byte | `32 1b 10 98 e2 bb f2 4b a0 6e 2b b3 3d 00 0c 20` | Datenträger-GUID | `98101b32-bbe2-4bf2-a06e-2bb33d000c20` |
+| `0x48` | 8 Byte | `02 00 00 00 00 00 00 00` | Start-LBA der Partitionseinträge | `2` |
+| `0x50` | 4 Byte | `80 00 00 00` | Anzahl der Partitionseinträge | `128` |
+| `0x54` | 4 Byte | `80 00 00 00` | Größe eines Partitionseintrags | 128 Byte |
+| `0x58` | 4 Byte | `4d e6 4e 6e` | CRC32 der Partitionseinträge | `0x6E4EE64D` |
 
 - **Microsoft Reserved Partition (MSR)**  
   Die MSR ist eine von Windows auf GPT-Datenträgern angelegte reservierte Partition ohne Dateisystem und Laufwerksbuchstaben. Sie stellt Speicherplatz für bestimmte interne Verwaltungs- und Partitionsoperationen bereit.
@@ -134,11 +149,11 @@ aktive Partition, während `0x00` eine inaktive Partition kennzeichnet.
     Todo
 
 - Ausgabe von mmls
-    ![gpt-mmls](../Forensik-Grafiken/Forensik-GPT-mmls.png)
-    Todo
+  ![gpt-mmls](../Forensik-Grafiken/Forensik-GPT-mmls.png)
+  
 
 ## Verborgene beziehungsweise nicht zugewiesene Bereiche
-
+Todo
 - **HPA – Host Protected Area**  
   Ein durch ATA-Befehle geschützter Bereich am Ende eines Datenträgers, der vom Betriebssystem normalerweise nicht erkannt wird.
 
@@ -156,9 +171,87 @@ aktive Partition, während `0x00` eine inaktive Partition kennzeichnet.
 
 
 
-## Verschlüsselung:
-- BitLocker
-- LUKS
-- FileVault
-- VeraCrypt
-- Self-Encrypting Drives
+## Verschlüsselung
+
+### BitLocker
+
+BitLocker ist die in Windows integrierte Datenträgerverschlüsselung und kann Betriebssystem-, Daten- sowie Wechseldatenträger schützen. Neben dem verschlüsselten Inhalt speichert das Volume BitLocker-Metadaten, die unter anderem Informationen zu Schutzmechanismen und Schlüsselmaterial enthalten.
+
+BitLocker kann in einem Datenträgerabbild häufig an der Signatur erkannt werden:
+
+```text
+-FVE-FS-
+```
+
+Geeignete Werkzeuge sind beispielsweise:
+
+```bash
+dislocker-metadata -V partition.dd
+```
+
+oder:
+
+```bash
+cryptsetup bitlkDump partition.dd
+```
+
+### LUKS
+
+LUKS ist ein unter Linux verbreitetes Format zur blockweisen Datenträgerverschlüsselung und wird häufig zusammen mit `dm-crypt` verwendet. Der LUKS-Header enthält unter anderem die Version, Verschlüsselungsparameter und mehrere Keyslots.
+
+Ein LUKS-Volume besitzt am Anfang normalerweise die Magic Bytes:
+
+```text
+4c 55 4b 53 ba be
+ L  U  K  S
+```
+
+Es kann folgendermaßen geprüft werden:
+
+```bash
+cryptsetup luksDump partition.dd
+```
+
+Alternativ:
+
+```bash
+file partition.dd
+```
+
+### FileVault
+
+FileVault ist die in macOS integrierte Verschlüsselung und schützt bei aktuellen Systemen APFS-Volumes. Ältere macOS-Versionen verwendeten dafür verschlüsselte CoreStorage-Volumes.
+
+Auf Datenträgerebene kann meist zunächst ein APFS-Container beziehungsweise eine Apple-Partition erkannt werden. Ob das enthaltene Volume verschlüsselt ist, muss anschließend anhand der APFS-Metadaten untersucht werden; eine einfache universelle FileVault-Signatur wie bei LUKS existiert nicht.
+
+### VeraCrypt
+
+VeraCrypt kann Partitionen, vollständige Datenträger oder Containerdateien verschlüsseln und unterstützt außerdem versteckte Volumes. Die verschlüsselten Daten sollen ohne Kennwort wie zufällige Daten aussehen.
+
+VeraCrypt besitzt absichtlich keine offen erkennbare Signatur im unentschlüsselten Volume. Eine hohe Entropie, eine passende Containergröße oder fehlende erkennbare Dateisystemstrukturen können einen Verdacht begründen, beweisen VeraCrypt jedoch nicht.
+
+Beispiel für einen Öffnungsversuch:
+
+```bash
+veracrypt partition.dd /mnt/veracrypt
+```
+
+Dafür werden das Kennwort und gegebenenfalls Schlüsseldateien benötigt.
+
+### Self-Encrypting Drives
+
+Self-Encrypting Drives verschlüsseln Daten eigenständig im Controller des Laufwerks, beispielsweise nach TCG-Opal- oder ATA-Security-Vorgaben. Die Verschlüsselung erfolgt für das Betriebssystem transparent, sobald der Datenträger entsperrt ist.
+
+Aus einem normalen Datenträgerabbild lässt sich die hardwarebasierte Verschlüsselung meist nicht erkennen: Wurde das Abbild im entsperrten Zustand erstellt, enthält es gewöhnlich bereits entschlüsselte Daten. Der Sicherheitszustand und die unterstützten Funktionen müssen direkt am Originalgerät über ATA-, NVMe- oder TCG-Abfragen festgestellt werden.
+
+## Erkennbarkeit im Datenträgerabbild
+
+| Verfahren | Im Abbild erkennbar? | Typischer Hinweis |
+|---|---|---|
+| BitLocker | meistens | `-FVE-FS-` und BitLocker-Metadaten |
+| LUKS | meistens | LUKS-Magic-Bytes und Header |
+| FileVault | teilweise | APFS-/CoreStorage-Metadaten |
+| VeraCrypt | normalerweise nicht eindeutig | hohe Entropie, keine erkennbare Struktur |
+| Self-Encrypting Drive | normalerweise nicht | Geräteabfrage am Original erforderlich |
+
+Eine hohe Entropie allein beweist keine Verschlüsselung. Auch komprimierte Daten, Zufallsdaten oder sicher gelöschte Bereiche können ein ähnliches Erscheinungsbild besitzen. Zudem kann ein beschädigter oder absichtlich entfernter Verschlüsselungsheader die Identifikation erschweren.
