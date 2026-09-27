@@ -15,7 +15,7 @@
     ![Ausgabe von XXD des DOS-Partitionierungsschemata](../Forensik-Grafiken/Forensik-DOS-darstellung.png)
     - `Nicht markiert`: Bootcode und Fehlermeldungen
     - `Grün`: Datenträgersignatur in Little Endian => `0xFBB219F8`
-    - `Rosa`: reserviert TODO
+    - `Rosa`: reserviert
     - `Gelb und Rot`: 4 Partitionseinträge
     - `Bs`: Windows Signatur `55aa`
 
@@ -120,9 +120,6 @@ aktive Partition, während `0x00` eine inaktive Partition kennzeichnet.
     dd if=EDF.dd of=gpt1-header.dd bs=512 count=1 skip=1 conv=noerror,sync
     ```
     ![pr-mbr](../Forensik-Grafiken/Forensik-GPT-header.png)
-    Todo
-- **Partitionseinträge und Prüfsummen**  
-  Die Partitionseinträge enthalten unter anderem Typ-GUID, eindeutige Partitions-GUID, Start- und End-LBA, Attribute und Partitionsname. CRC32-Prüfsummen schützen den GPT-Header und die Partitionseinträge und ermöglichen die Erkennung von Beschädigungen.
   | Offset | Größe | Bytes | Feld | Dekodierter Wert |
   |---:|---:|---|---|---|
   | `0x00` | 8 Byte | `45 46 49 20 50 41 52 54` | GPT-Signatur | `EFI PART` |
@@ -140,6 +137,11 @@ aktive Partition, während `0x00` eine inaktive Partition kennzeichnet.
   | `0x54` | 4 Byte | `80 00 00 00` | Größe eines Partitionseintrags | 128 Byte |
   | `0x58` | 4 Byte | `4d e6 4e 6e` | CRC32 der Partitionseinträge | `0x6E4EE64D` |
 
+- **Partitionseinträge und Prüfsummen**  
+  Die Partitionseinträge enthalten unter anderem Typ-GUID, eindeutige Partitions-GUID, Start- und End-LBA, Attribute und Partitionsname. CRC32-Prüfsummen schützen den GPT-Header und die Partitionseinträge und ermöglichen die Erkennung von Beschädigungen.
+  
+  Todo
+
 - **Microsoft Reserved Partition (MSR)**  
   Die MSR ist eine von Windows auf GPT-Datenträgern angelegte reservierte Partition ohne Dateisystem und Laufwerksbuchstaben. Sie stellt Speicherplatz für bestimmte interne Verwaltungs- und Partitionsoperationen bereit.
     Todo
@@ -153,7 +155,7 @@ aktive Partition, während `0x00` eine inaktive Partition kennzeichnet.
   
 
 ## Verborgene beziehungsweise nicht zugewiesene Bereiche
-Todo
+
 - **HPA – Host Protected Area**  
   Ein durch ATA-Befehle geschützter Bereich am Ende eines Datenträgers, der vom Betriebssystem normalerweise nicht erkannt wird.
 
