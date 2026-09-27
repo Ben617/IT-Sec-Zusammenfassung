@@ -1,0 +1,33 @@
+# Dateiforensik
+
+- Dateityperkennung
+  - Dateiendung
+  - Dateisignatur beziehungsweise Magic Bytes
+  - MIME-Type
+  - Abweichung zwischen Endung und tatsächlichem Format
+- Dokumentanalyse
+  - PDF
+  - Microsoft-Office-Dokumente
+  - Archive
+  - eingebettete Dateien und Makros
+- Anwendungsmetadaten
+  - Autor und Organisation
+  - Erstellungsprogramm
+  - Bearbeitungsdauer und Revisionsnummer
+  - EXIF-Daten von Bildern
+  - GPS- und Kamerainformationen
+- Inhaltsanalyse
+  - Zeichenketten
+  - Skripte und Makros
+  - URLs und E-Mail-Adressen
+  - eingebettete beziehungsweise verschlüsselte Inhalte
+- Integrität und Manipulation
+  - Hashwerte
+  - digitale Signaturen
+  - beschädigte Dateistrukturen
+  - manipulierte Metadaten
+  - Steganografie
+- Dateirekonstruktion
+  - File Carving
+  - fragmentierte Dateien
+  - Reparatur beschädigter Dateien

@@ -49,7 +49,7 @@
 
 - [Linux](Linux-Forensik.md)
 
-## Dateiforensik
+## [Dateiforensik](Datei-Forensik.md)
 
 - Dateityperkennung
   - Dateiendung
