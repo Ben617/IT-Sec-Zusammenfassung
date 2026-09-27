@@ -32,33 +32,45 @@
   Ausgabe:
   ![abc](../Forensik-Grafiken/Forensik-DOS-Partitionstabelle.png)
   
-  - Bedeutung der Einzelnen Spalten in der Partitionstabelle:
+    - Bedeutung der einzelnen Felder eines MBR-Partitionseintrags:
+
   | Relativer Offset | Größe | Bedeutung | Besonderheit |
   |---:|---:|---|---|
-  | `+0x00` | 1 Byte | Boot-Indikator | 80 = bootbar |
-  | `+0x01` | 3 Byte | CHS-Startadresse | nicht genutzt |
-  | `+0x04` | 1 Byte | Partitionstyp | |
-  | `+0x05` | 3 Byte | CHS-Endadresse | nicht genutzt |
-  | `+0x08` | 4 Byte | Start-LBA | |
-  | `+0x0C` | 4 Byte | Anzahl der Sektoren | |
-  
-    - Partitionstyp:
+  | `+0x00` | 1 Byte | Boot-Indikator | `0x80` = aktiv/bootfähig; `0x00` = nicht aktiv |
+  | `+0x01` | 3 Byte | CHS-Startadresse | Historische Adressierung; heute meist nicht mehr maßgeblich |
+  | `+0x04` | 1 Byte | Partitionstyp | Kennzeichnet den vorgesehenen Partitionstyp |
+  | `+0x05` | 3 Byte | CHS-Endadresse | Historische Adressierung; häufig mit Platzhalterwerten belegt |
+  | `+0x08` | 4 Byte | Start-LBA | Erster logischer Sektor; als Little-Endian-Wert gespeichert |
+  | `+0x0C` | 4 Byte | Anzahl der Sektoren | Länge der Partition; als Little-Endian-Wert gespeichert |
+
+    - Häufige MBR-Partitionstypen:
+
   | Wert | Bedeutung |
   |---:|---|
-  | `00` | leer |
-  | `01` | FAT12 |
-  | `02` |  |
-  | `03` |  |
-  | `04` |  |
-  | `05` | erweiterte DOS-Partition |
-  | `06` |  |
-  | `07` | NTFS |
-  | `0B` |  |
-  | `0F` |  |
-  | `82` | Linux Swap |
-  | `83` | Linux |
-  | `A5` | FreeBSD |
-  | `A6` | OpenBSD |
+  | `0x00` | Leerer beziehungsweise unbenutzter Partitionseintrag |
+  | `0x01` | FAT12 |
+  | `0x02` | XENIX Root |
+  | `0x03` | XENIX User |
+  | `0x04` | FAT16 mit weniger als 32 MiB |
+  | `0x05` | Erweiterte DOS-Partition mit CHS-Adressierung |
+  | `0x06` | FAT16 mit mindestens 32 MiB |
+  | `0x07` | HPFS, NTFS oder exFAT |
+  | `0x0B` | FAT32 mit CHS-Adressierung |
+  | `0x0C` | FAT32 mit LBA-Adressierung |
+  | `0x0E` | FAT16 mit LBA-Adressierung |
+  | `0x0F` | Erweiterte Partition mit LBA-Adressierung |
+  | `0x82` | Linux Swap beziehungsweise Solaris |
+  | `0x83` | Linux-Dateisystem |
+  | `0x85` | Erweiterte Linux-Partition |
+  | `0x8E` | Linux LVM |
+  | `0xA5` | FreeBSD |
+  | `0xA6` | OpenBSD |
+  | `0xA8` | macOS beziehungsweise Darwin UFS |
+  | `0xAB` | macOS Boot |
+  | `0xAF` | Apple HFS/HFS+ |
+  | `0xEE` | GPT Protective MBR |
+  | `0xEF` | EFI-Systempartition |
+  | `0xFD` | Linux RAID |
 
     - Start-LBA:
   Der Wert ist im Little Endian gespeichert, daher lautet der echte Wert `00 00 08 00` und wird zu `0x00000800 = 2048` übersetzt.
