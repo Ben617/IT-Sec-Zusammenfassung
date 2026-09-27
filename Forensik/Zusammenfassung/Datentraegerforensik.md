@@ -7,9 +7,9 @@
 
 ### MBR/DOS
 - Partitionstabelle
-  - Zunächst mit xxd die Sektoren und Blockgröße auslesen.
+  - Zunächst einal die Hexdump-Darstellung des Beginns eines Datenträgers mit DOS-Partitionierungsschemata:
     ```bash
-    Todo
+    xxd EDF.dd | less
     ```
     Ausgabe:
     ![Ausgabe von XXD des DOS-Partitionierungsschemata](../Forensik-Grafiken/Forensik-DOS-darstellung.png)
@@ -32,7 +32,41 @@
   Ausgabe:
   ![abc](../Forensik-Grafiken/Forensik-DOS-Partitionstabelle.png)
   
-  Todo
+  - Bedeutung der Einzelnen Spalten in der Partitionstabelle:
+  | Relativer Offset | Größe | Bedeutung | Besonderheit |
+  |---:|---:|---|---|
+  | `+0x00` | 1 Byte | Boot-Indikator | 80 = bootbar |
+  | `+0x01` | 3 Byte | CHS-Startadresse | nicht genutzt |
+  | `+0x04` | 1 Byte | Partitionstyp | |
+  | `+0x05` | 3 Byte | CHS-Endadresse | nicht genutzt |
+  | `+0x08` | 4 Byte | Start-LBA | |
+  | `+0x0C` | 4 Byte | Anzahl der Sektoren | |
+  
+    - Partitionstyp:
+  | Wert | Bedeutung |
+  |---:|---|
+  | `00` | leer |
+  | `01` | FAT12 |
+  | `02` |  |
+  | `03` |  |
+  | `04` |  |
+  | `05` | erweiterte DOS-Partition |
+  | `06` |  |
+  | `07` | NTFS |
+  | `0B` |  |
+  | `0F` |  |
+  | `82` | Linux Swap |
+  | `83` | Linux |
+  | `A5` | FreeBSD |
+  | `A6` | OpenBSD |
+
+    - Start-LBA:
+  Der Wert ist im Little Endian gespeichert, daher lautet der echte Wert `00 00 08 00` und wird zu `0x00000800 = 2048` übersetzt.
+  
+    - Anzahl der Sektoren:
+    Die letzten vier Bytes enthalten die Länge der Partition in Sektoren. Auch dieser Wert ist in Little Endian gespeichert.
+    - End-LBA berechnen:
+    > End-LBA = Start-LBA + Anzahl der Sektoren − 1
 
 - Bootcode
 

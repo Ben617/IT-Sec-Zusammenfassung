@@ -2,7 +2,7 @@
 
 ## Datenerfassung und Beweissicherung
 
-## [Datenträgerforensik](Datenträgerforensik.md)
+## [Datenträgerforensik](Datentraegerforensik.md)
 - Datenträgeraufbau
     - Sektoren und Blöcke
     - physische und logische Blockadressierung
