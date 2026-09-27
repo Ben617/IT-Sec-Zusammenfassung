@@ -81,7 +81,7 @@
     > End-LBA = Start-LBA + Anzahl der Sektoren − 1
 - primäre und erweiterte Partitionen
 
-Todo
+Todo beschreibung und ausarbeitung
 - Bootcode
 
 Der Bootcode befindet sich am Anfang des MBR. Bei einem klassischen 
@@ -108,20 +108,52 @@ aktive Partition, während `0x00` eine inaktive Partition kennzeichnet.
   
 
 ### GPT
-- Protective MBR
-- primärer und sekundärer GPT-Header
-- Partitionseinträge und Prüfsummen
-- Microsoft Reserved Partition (MSR)
-- EFI-Systempartition (ESP)
 
+- **Protective MBR**  
+  Der Protective MBR befindet sich in `LBA 0` und enthält üblicherweise einen Partitionseintrag vom Typ `0xEE`. Er verhindert, dass ältere Programme den GPT-Datenträger irrtümlich als unpartitioniert behandeln und überschreiben.
+    ![pr-mbr](../Forensik-Grafiken/Forensik-GPT-mbr.png)
+
+- **Primärer und sekundärer GPT-Header**  
+  Der primäre GPT-Header liegt normalerweise in `LBA 1`, während sich seine Sicherung am Ende des Datenträgers befindet. Beide enthalten unter anderem die Datenträger-GUID sowie Position und Größe der Partitionstabelle.
+  Mit dem folgenden Befehl kann der GPT Header kopiert und anschließend ausgelesen werden.
+  ```bash
+    dd if=EDF.dd of=gpt1-header.dd bs=512 count=1 skip=1 conv=noerror,sync
+    ```
+    ![pr-mbr](../Forensik-Grafiken/Forensik-GPT-header.png)
+    Todo
+- **Partitionseinträge und Prüfsummen**  
+  Die Partitionseinträge enthalten unter anderem Typ-GUID, eindeutige Partitions-GUID, Start- und End-LBA, Attribute und Partitionsname. CRC32-Prüfsummen schützen den GPT-Header und die Partitionseinträge und ermöglichen die Erkennung von Beschädigungen.
+    Todo
+
+- **Microsoft Reserved Partition (MSR)**  
+  Die MSR ist eine von Windows auf GPT-Datenträgern angelegte reservierte Partition ohne Dateisystem und Laufwerksbuchstaben. Sie stellt Speicherplatz für bestimmte interne Verwaltungs- und Partitionsoperationen bereit.
+    Todo
+
+- **EFI-Systempartition (ESP)**  
+  Die ESP ist normalerweise mit FAT32 formatiert und enthält Bootloader, Treiber sowie weitere für den UEFI-Systemstart benötigte Dateien. Sie wird über eine festgelegte GPT-Typ-GUID als EFI-Systempartition gekennzeichnet.
+    Todo
+
+- Ausgabe von mmls
+    ![gpt-mmls](../Forensik-Grafiken/Forensik-GPT-mmls.png)
+    Todo
 
 ## Verborgene beziehungsweise nicht zugewiesene Bereiche
-- HPA - Host Protected Area
-- DCO - Device Configuration Overlay
-- nicht zugewiesener Speicher
-- Partition Gaps
-- SSD Over-Provisioning
-- Over-Provisioning bei SSDs
+
+- **HPA – Host Protected Area**  
+  Ein durch ATA-Befehle geschützter Bereich am Ende eines Datenträgers, der vom Betriebssystem normalerweise nicht erkannt wird.
+
+- **DCO – Device Configuration Overlay**  
+  Eine Konfigurationsebene, mit der die gemeldete Kapazität und bestimmte Funktionen eines Datenträgers eingeschränkt werden können.
+
+- **Nicht zugewiesener Speicher**  
+  Speicherplatz, der aktuell keiner Partition zugeordnet ist und noch Fragmente früherer Daten enthalten kann.
+
+- **Partition Gaps**  
+  Nicht partitionierte Speicherbereiche zwischen Partitionen, in denen Datenreste oder absichtlich verborgene Daten liegen können.
+
+- **SSD Over-Provisioning**  
+  Für den SSD-Controller reservierter und für das Betriebssystem nicht direkt zugänglicher Flash-Speicher, der unter anderem für Wear Levelling und den Austausch defekter Speicherzellen verwendet wird.
+
 
 
 ## Verschlüsselung:
