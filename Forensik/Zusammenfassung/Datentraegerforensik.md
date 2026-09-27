@@ -124,21 +124,21 @@ aktive Partition, während `0x00` eine inaktive Partition kennzeichnet.
 - **Partitionseinträge und Prüfsummen**  
   Die Partitionseinträge enthalten unter anderem Typ-GUID, eindeutige Partitions-GUID, Start- und End-LBA, Attribute und Partitionsname. CRC32-Prüfsummen schützen den GPT-Header und die Partitionseinträge und ermöglichen die Erkennung von Beschädigungen.
   | Offset | Größe | Bytes | Feld | Dekodierter Wert |
-|---:|---:|---|---|---|
-| `0x00` | 8 Byte | `45 46 49 20 50 41 52 54` | GPT-Signatur | `EFI PART` |
-| `0x08` | 4 Byte | `00 00 01 00` | GPT-Version | `1.0` |
-| `0x0C` | 4 Byte | `5c 00 00 00` | Headergröße | 92 Byte |
-| `0x10` | 4 Byte | `8b c1 39 3b` | CRC32 des Headers | `0x3B39C18B` |
-| `0x14` | 4 Byte | `00 00 00 00` | Reserviert | `0` |
-| `0x18` | 8 Byte | `01 00 00 00 00 00 00 00` | Aktueller LBA | `1` |
-| `0x20` | 8 Byte | `ff 9f d5 01 00 00 00 00` | LBA des Backup-Headers | `30.777.343` |
-| `0x28` | 8 Byte | `22 00 00 00 00 00 00 00` | Erster nutzbarer LBA | `34` |
-| `0x30` | 8 Byte | `de 9f d5 01 00 00 00 00` | Letzter nutzbarer LBA | `30.777.310` |
-| `0x38` | 16 Byte | `32 1b 10 98 e2 bb f2 4b a0 6e 2b b3 3d 00 0c 20` | Datenträger-GUID | `98101b32-bbe2-4bf2-a06e-2bb33d000c20` |
-| `0x48` | 8 Byte | `02 00 00 00 00 00 00 00` | Start-LBA der Partitionseinträge | `2` |
-| `0x50` | 4 Byte | `80 00 00 00` | Anzahl der Partitionseinträge | `128` |
-| `0x54` | 4 Byte | `80 00 00 00` | Größe eines Partitionseintrags | 128 Byte |
-| `0x58` | 4 Byte | `4d e6 4e 6e` | CRC32 der Partitionseinträge | `0x6E4EE64D` |
+  |---:|---:|---|---|---|
+  | `0x00` | 8 Byte | `45 46 49 20 50 41 52 54` | GPT-Signatur | `EFI PART` |
+  | `0x08` | 4 Byte | `00 00 01 00` | GPT-Version | `1.0` |
+  | `0x0C` | 4 Byte | `5c 00 00 00` | Headergröße | 92 Byte |
+  | `0x10` | 4 Byte | `8b c1 39 3b` | CRC32 des Headers | `0x3B39C18B` |
+  | `0x14` | 4 Byte | `00 00 00 00` | Reserviert | `0` |
+  | `0x18` | 8 Byte | `01 00 00 00 00 00 00 00` | Aktueller LBA | `1` |
+  | `0x20` | 8 Byte | `ff 9f d5 01 00 00 00 00` | LBA des Backup-Headers | `30.777.343` |
+  | `0x28` | 8 Byte | `22 00 00 00 00 00 00 00` | Erster nutzbarer LBA | `34` |
+  | `0x30` | 8 Byte | `de 9f d5 01 00 00 00 00` | Letzter nutzbarer LBA | `30.777.310` |
+  | `0x38` | 16 Byte | `32 1b 10 98 e2 bb f2 4b a0 6e 2b b3 3d 00 0c 20` | Datenträger-GUID | `98101b32-bbe2-4bf2-a06e-2bb33d000c20` |
+  | `0x48` | 8 Byte | `02 00 00 00 00 00 00 00` | Start-LBA der Partitionseinträge | `2` |
+  | `0x50` | 4 Byte | `80 00 00 00` | Anzahl der Partitionseinträge | `128` |
+  | `0x54` | 4 Byte | `80 00 00 00` | Größe eines Partitionseintrags | 128 Byte |
+  | `0x58` | 4 Byte | `4d e6 4e 6e` | CRC32 der Partitionseinträge | `0x6E4EE64D` |
 
 - **Microsoft Reserved Partition (MSR)**  
   Die MSR ist eine von Windows auf GPT-Datenträgern angelegte reservierte Partition ohne Dateisystem und Laufwerksbuchstaben. Sie stellt Speicherplatz für bestimmte interne Verwaltungs- und Partitionsoperationen bereit.
