@@ -24,7 +24,7 @@
     dd if=EDF.dd of=mbr.dd bs=512 count=1 conv=noerror,sync status=progress
     ```
 
-- primäre und erweiterte Partitionen
+- Partitionstabelle
   - Danach die primäre Partitionstabelle anzeigen lassen:
   ```bash
   xxd -g 1 -s 0x1BE -l 64 mbr.dd
@@ -79,7 +79,9 @@
     Die letzten vier Bytes enthalten die Länge der Partition in Sektoren. Auch dieser Wert ist in Little Endian gespeichert.
     - End-LBA berechnen:
     > End-LBA = Start-LBA + Anzahl der Sektoren − 1
+- primäre und erweiterte Partitionen
 
+Todo
 - Bootcode
 
 Der Bootcode befindet sich am Anfang des MBR. Bei einem klassischen 
@@ -95,7 +97,15 @@ aktive Partition, während `0x00` eine inaktive Partition kennzeichnet.
 - Ausgabe von mmls:
   ![abc](../Forensik-Grafiken/Forensik-DOS-mmls.png)
    
-  Todo
+  | Slot | Bedeutung |
+  |---:|---|
+  | `Meta` | Zeigt DAS-Tables und Extended Partitions auf |
+  | `-------` | zeigt Unallocated Backupsereiche an |
+  | `000:000` | erste Primärepartition  |
+  | `000:001` | zweite Primärepartition |
+  | `001:000` | erste Partition der erweiterten Partition |
+  | `002:000` | zweite Partition der erweiterten Partition |
+  
 
 ### GPT
 - Protective MBR
