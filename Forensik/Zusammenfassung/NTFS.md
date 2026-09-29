@@ -1,9 +1,10 @@
 - NTFS
 
-    > Typisches Dateisystem von Windows
+    > NTFS (New Technology File System) ist das standardmäßig verwendete Dateisystem moderner Windows-Systeme. Es verwaltet Dateien weitgehend als Einträge und Attribute innerhalb der Master File Table.
     
-    -Grundlagen
+    - Grundlagen
         - Cluster und Logical Cluster Numbers
+        
         - Dateien als Sammlung von Attributen
     - Zentrale Strukturen:
         - Master File Table ($MFT)

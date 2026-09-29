@@ -12,6 +12,7 @@
   - `if`: Input File – Quelldatenträger oder Quelldatei
   - `of`: Output File – Zieldatei oder Zieldatenträger
   - `bs`: Größe der zu kopierenden Blöcke
+  - `skip`: Anzahl der zu übersprigenden Blöcke
   - `conv=noerror`: Kopiervorgang bei Lesefehlern fortsetzen
   - `conv=sync`: fehlerhafte Blöcke mit Nullen auffüllen
   - `status=progress`: Fortschritt anzeigen
