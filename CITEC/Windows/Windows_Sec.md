@@ -28,10 +28,10 @@ Die drei klassischen Schutzziele werden hÃ¤ufig als **CIA-Triade** zusammengef
 Weitere wichtige Ziele sind:
 
 - **AuthentizitÃ¤t:** Eine IdentitÃ¤t oder Nachricht ist echt.
-- **Nachvollziehbarkeit:** Aktionen kÃ¶nnen protokolliert und zugeordnet werden.
+- **Nachvollziehbarkeit:** Aktionen können protokolliert und zugeordnet werden.
 - **Verbindlichkeit:** Eine ausgefÃ¼hrte Handlung kann nicht glaubhaft abgestritten werden.
 
-SicherheitsmaÃŸnahmen kÃ¶nnen miteinander in Konflikt stehen. Sehr strenge Kontrollen kÃ¶nnen beispielsweise die Bedienbarkeit oder VerfÃ¼gbarkeit beeintrÃ¤chtigen. Sicherheit ist daher eine fortlaufende Risikobetrachtung und kein einmal erreichter Endzustand.
+Sicherheitsmaßnahmen können miteinander in Konflikt stehen. Sehr strenge Kontrollen kÃ¶nnen beispielsweise die Bedienbarkeit oder VerfÃ¼gbarkeit beeintrÃ¤chtigen. Sicherheit ist daher eine fortlaufende Risikobetrachtung und kein einmal erreichter Endzustand.
 
 ### Bedrohung, Schwachstelle und Risiko
 
