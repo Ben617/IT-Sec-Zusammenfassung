@@ -36,7 +36,7 @@ Hier ist eine strukturierte Gliederung zum Thema **Programmieren**:
 
 ---
 
-# 2. Datenstrukturen
+## 2. Datenstrukturen
 ### 2.1 Grundlagen von Datenstrukturen
 - Zweck und Bedeutung
 - Speicherung und Organisation von Daten
@@ -70,7 +70,8 @@ Hier ist eine strukturierte Gliederung zum Thema **Programmieren**:
 
 ---
 
-# 3. Methoden und Algorithmen
+## 3. Methoden und Algorithmen
+
 ### 3.1 Rekursion
 - Definition und Funktionsweise
 - Basisfall und rekursiver Schritt
@@ -80,7 +81,19 @@ Hier ist eine strukturierte Gliederung zum Thema **Programmieren**:
   - Türme von Hanoi
 - Vor- und Nachteile gegenüber Schleifen
 
-### 3.2 Suchalgorithmen
+### 3.2 Backtracking
+- Definition und Funktionsweise
+- Lösungen schrittweise aufbauen
+- Entscheidungen treffen, prüfen und rückgängig machen
+- Abbruchbedingungen und Beschneiden des Suchraums
+- Zusammenhang mit Rekursion und Tiefensuche
+- Beispiele:
+  - N-Damen-Problem
+  - Sudoku lösen
+  - Wege durch ein Labyrinth finden
+- Laufzeit und Grenzen des Verfahrens
+
+### 3.3 Suchalgorithmen
 - Lineare Suche
 - Binäre Suche
 - Baumsuche
@@ -88,7 +101,7 @@ Hier ist eine strukturierte Gliederung zum Thema **Programmieren**:
   - Tiefensuche (DFS)
   - Breitensuche (BFS)
 
-### 3.3 Sortieralgorithmen
+### 3.4 Sortieralgorithmen
 - Einfache Sortierverfahren:
   - Bubble Sort
   - Selection Sort
@@ -102,7 +115,7 @@ Hier ist eine strukturierte Gliederung zum Thema **Programmieren**:
   - Speicherbedarf
   - Stabilität
 
-### 3.4 Algorithmische Analyse
+### 3.5 Algorithmische Analyse
 - Effizienzbewertung
 - Best-, Worst- und Durchschnittsfall
 - Big-O-Notation
