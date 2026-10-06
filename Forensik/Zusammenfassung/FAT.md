@@ -38,7 +38,7 @@
 
 
 
-        - Bootsektor
+        * Bootsektor
         Der Bootsektor befindet sich am Anfang der FAT-Partition. Er enthält neben Startcode und Dateisysteminformationen auch den BIOS Parameter Block. Um den Bootsektor aus der bereits extrahierten Partition zu kopieren, werden die ersten 512 Byte ausgelesen:
 
         ```bash
@@ -47,7 +47,7 @@
 
 
 
-        - BIOS Parameter Block (BPB)
+        * BIOS Parameter Block (BPB)
         Der BIOS Parameter Block beginnt bei Byte 11 beziehungsweise am Offset `0x0B` des Bootsektors. Er enthält die Parameter, aus denen die Lage und Größe der übrigen Dateisystembereiche berechnet werden. Dazu gehören unter anderem die Sektorgröße, die Anzahl reservierter Sektoren, die Anzahl der FAT-Kopien und die Größe einer FAT.
 
         Der relevante Bereich kann mit `xxd` hervorgehoben ausgegeben werden:
@@ -75,7 +75,7 @@
 
 
         
-        - File Allocation Table
+        * File Allocation Table
         
         Die File Allocation Table verwaltet die Belegung und Verkettung der Cluster. Ihre Position und Größe lassen sich der Ausgabe von `fsstat` entnehmen:
 
@@ -114,7 +114,7 @@
 
 
 
-        - FAT-Kopien
+        * FAT-Kopien
         
 
         FAT-Dateisysteme besitzen üblicherweise zwei Kopien der File Allocation Table. Die zweite FAT liegt normalerweise unmittelbar hinter der ersten. Ihr Startsektor ergibt sich daher aus:
@@ -155,7 +155,141 @@
 
 
 
-        - Verzeichniseinträge
+        * Verzeichniseinträge
+
+        Ein FAT-Verzeichnis besteht aus einer Folge von jeweils **32 Byte großen Verzeichniseinträgen**. Ein Eintrag enthält unter anderem den Dateinamen, Dateiattribute, Zeitstempel, Startcluster und die Dateigröße.
+
+        Zunächst können die Verzeichniseinträge mit `fls` aufgelistet werden:
+
+        ```bash
+        fls partition.dd
+        ```
+
+        Eine rekursive Ausgabe aller Verzeichnisse und Dateien erfolgt mit:
+
+        ```bash
+        fls -r -p partition.dd
+        ```
+
+        Falls direkt mit dem vollständigen Datenträgerabbild gearbeitet wird, muss der Startsektor der Partition angegeben werden:
+
+        ```bash
+        fls -o "$STARTSEKTOR" -r -p EDF.dd
+        ```
+
+        Die ausführliche Ausgabe mit Zeitstempeln und Metadatenadressen erhält man mit:
+
+        ```bash
+        fls -l -r -p partition.dd
+        ```
+
+        Vor jedem Eintrag zeigt `fls` eine Metadatenadresse an. Diese Adresse kann anschließend an `istat` übergeben werden:
+
+        ```bash
+        istat partition.dd METADATENADRESSE
+        ```
+
+        Beispiel:
+
+        ```bash
+        istat partition.dd 42
+        ```
+
+        `istat` zeigt unter anderem:
+
+        - den Dateityp,
+        - die Dateigröße,
+        - den Startcluster,
+        - die belegten Cluster beziehungsweise Sektoren,
+        - den Erstellungszeitpunkt,
+        - den letzten Schreibzugriff,
+        - den letzten Lesezugriff,
+        - den Zustand des Eintrags.
+        
+        **[FOTO EINFÜGEN: Ausgabe von `fls` mit markierter Metadatenadresse]**
+        
+        **[FOTO EINFÜGEN: `istat`-Ausgabe des ausgewählten Verzeichniseintrags]**
+        
+        #### Verzeichniseinträge im Hexdump
+
+        Um die ursprünglichen 32-Byte-Einträge zu untersuchen, muss der Datenbereich des jeweiligen Verzeichnisses ausgelesen werden. Zunächst wird die Metadatenadresse des Verzeichnisses mit `fls` bestimmt. Danach zeigt `istat`, in welchen Sektoren beziehungsweise Clustern das Verzeichnis gespeichert ist:
+
+        ```bash
+        istat partition.dd VERZEICHNISADRESSE
+        ```
+
+        Für das Root-Verzeichnis wird häufig die Metadatenadresse `2` verwendet:
+
+        ```bash
+        istat partition.dd 2
+        ```
+        
+        Die genaue Adresse sollte jedoch immer anhand der eigenen `fls`-Ausgabe überprüft werden.
+        
+        Ein durch `istat` angezeigter Sektor kann mit `blkcat` ausgelesen werden:
+        
+        ```bash
+        blkcat partition.dd SEKTORNUMMER > verzeichnis.bin
+        ```
+        
+        Falls das Verzeichnis mehrere zusammenhängende Sektoren belegt, kann deren Anzahl zusätzlich angegeben werden:
+        
+        ```bash
+        blkcat partition.dd STARTSEKTOR ANZAHL > verzeichnis.bin
+        ```
+        
+        Danach wird der Verzeichnisbereich als Hexdump dargestellt:
+        
+        ```bash
+        xxd -g 1 -c 32 verzeichnis.bin
+        ```
+        
+        Die Option `-c 32` stellt 32 Byte pro Zeile dar. Dadurch entspricht eine Zeile genau der Größe eines FAT-Verzeichniseintrags, sofern der Eintrag am Zeilenanfang beginnt.
+        
+        Ein einzelner Eintrag kann beispielsweise so extrahiert werden:
+        
+        ```bash
+        dd if=verzeichnis.bin of=eintrag.bin \
+           bs=1 skip=$((NUMMER * 32)) count=32 status=none
+        ```
+        
+        Dabei beginnt die Nummerierung mit `NUMMER=0`. Der extrahierte Eintrag kann anschließend untersucht werden:
+        
+        ```bash
+        xxd -g 1 -c 32 eintrag.bin
+        ```
+        
+        Die wichtigsten Felder eines normalen FAT-Verzeichniseintrags sind:
+        
+        | Offset | Größe | Inhalt |
+        |---:|---:|---|
+        | `0x00` | 8 Byte | kurzer Dateiname |
+        | `0x08` | 3 Byte | Dateiendung |
+        | `0x0B` | 1 Byte | Dateiattribute |
+        | `0x0E` | 2 Byte | Erstellungszeit |
+        | `0x10` | 2 Byte | Erstellungsdatum |
+        | `0x16` | 2 Byte | letzte Schreibzeit |
+        | `0x18` | 2 Byte | letztes Schreibdatum |
+        | `0x14` | 2 Byte | obere 16 Bit des Startclusters, nur FAT32 |
+        | `0x1A` | 2 Byte | untere 16 Bit des Startclusters |
+        | `0x1C` | 4 Byte | Dateigröße |
+        
+        Der Startcluster einer FAT32-Datei wird aus zwei Feldern zusammengesetzt:
+        
+        ```text
+        Startcluster = (oberer Teil << 16) | unterer Teil
+        ```
+        
+        Besondere Werte im ersten Byte eines Verzeichniseintrags sind:
+        
+        - `0x00`: Dieser und alle folgenden Einträge sind unbenutzt.
+        - `0xE5`: Der Eintrag wurde gelöscht.
+        - `0x2E`: Der Eintrag bezeichnet `.` oder `..`.
+        - Attribut `0x0F`: Der Eintrag gehört zu einem langen Dateinamen.
+
+        **[FOTO EINFÜGEN: Hexdump eines Verzeichnisbereichs mit markierten 32-Byte-Einträgen]**
+
+        
         
         - Long File Names (LFN)
         - FAT32: FSInfo-Sektor
