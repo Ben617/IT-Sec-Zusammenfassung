@@ -1,11 +1,11 @@
-- FAT
+# FAT
 
     > Typischer Einsatz: USB-Sticks, Speicherkarten und ältere Systeme
     
-    - Grundbegriffe
-        - FAT12, FAT16 und FAT32
-        - Cluster und Clusterketten
-    - Zentrale Strukturen:
+## Grundbegriffe
+    - FAT12, FAT16 und FAT32
+    - Cluster und Clusterketten
+## Zentrale Strukturen:
         Zunächst wird die Partitionstabelle des Datenträgerabbilds untersucht. Dadurch lässt sich feststellen, unter welcher Partitionsnummer die FAT-Partition geführt wird und bei welchem Sektor sie beginnt.
 
         ```bash
@@ -47,7 +47,7 @@
 
 
 
-        * BIOS Parameter Block (BPB)
+    * BIOS Parameter Block (BPB)
         Der BIOS Parameter Block beginnt bei Byte 11 beziehungsweise am Offset `0x0B` des Bootsektors. Er enthält die Parameter, aus denen die Lage und Größe der übrigen Dateisystembereiche berechnet werden. Dazu gehören unter anderem die Sektorgröße, die Anzahl reservierter Sektoren, die Anzahl der FAT-Kopien und die Größe einer FAT.
 
         Der relevante Bereich kann mit `xxd` hervorgehoben ausgegeben werden:
@@ -75,7 +75,7 @@
 
 
         
-        * File Allocation Table
+    * File Allocation Table
         
         Die File Allocation Table verwaltet die Belegung und Verkettung der Cluster. Ihre Position und Größe lassen sich der Ausgabe von `fsstat` entnehmen:
 
@@ -110,11 +110,11 @@
         ![]()
 
 
-        # Todo Auswertung
+        Todo Auswertung
 
 
 
-        * FAT-Kopien
+    * FAT-Kopien
         
 
         FAT-Dateisysteme besitzen üblicherweise zwei Kopien der File Allocation Table. Die zweite FAT liegt normalerweise unmittelbar hinter der ersten. Ihr Startsektor ergibt sich daher aus:
@@ -136,7 +136,7 @@
         ```
 
         Mit `cmp` lässt sich überprüfen, ob beide FAT-Kopien identisch sind:
-        #todo sollte er gelcih sein?
+        todo sollte er gelcih sein?
         ```bash
         cmp fat1.bin fat2.bin
         ```
@@ -155,7 +155,7 @@
 
 
 
-        * Verzeichniseinträge
+    * Verzeichniseinträge
 
         Ein FAT-Verzeichnis besteht aus einer Folge von jeweils **32 Byte großen Verzeichniseinträgen**. Ein Eintrag enthält unter anderem den Dateinamen, Dateiattribute, Zeitstempel, Startcluster und die Dateigröße.
 
@@ -210,7 +210,7 @@
         
         **[FOTO EINFÜGEN: `istat`-Ausgabe des ausgewählten Verzeichniseintrags]**
         
-        #### Verzeichniseinträge im Hexdump
+    * Verzeichniseinträge im Hexdump
 
         Um die ursprünglichen 32-Byte-Einträge zu untersuchen, muss der Datenbereich des jeweiligen Verzeichnisses ausgelesen werden. Zunächst wird die Metadatenadresse des Verzeichnisses mit `fls` bestimmt. Danach zeigt `istat`, in welchen Sektoren beziehungsweise Clustern das Verzeichnis gespeichert ist:
 
@@ -291,21 +291,21 @@
 
         
         
-        - Long File Names (LFN)
-        - FAT32: FSInfo-Sektor
-    - Metadaten und Zeitstempel
-        - Erstellungs-, Änderungs- und Zugriffszeit
-        - begrenzte Zeitstempelauflösung
-        - keine Benutzer- und Berechtigungsinformationen
-    - Gelöschte Dateien
-        - Kennzeichnung gelöschter Verzeichniseinträge
-        - Verlust des ersten Zeichens im Dateinamen
-        - Rekonstruktion von Clusterketten
-    - Nicht zugewiesener Speicher und Slack Space
-        - freie Cluster
-        - File Slack
-        - Dateifragmente
-        - File Carving
-    - Timeline-Erstellung
-        - Auswertung der Verzeichniseinträge
-        - eingeschränkte Aussagekraft der Zeitstempel
+    * Long File Names (LFN)
+    * FAT32: FSInfo-Sektor
+## Metadaten und Zeitstempel
+    - Erstellungs-, Änderungs- und Zugriffszeit
+    - begrenzte Zeitstempelauflösung
+    - keine Benutzer- und Berechtigungsinformationen
+## Gelöschte Dateien
+    - Kennzeichnung gelöschter Verzeichniseinträge
+    - Verlust des ersten Zeichens im Dateinamen
+    - Rekonstruktion von Clusterketten
+## Nicht zugewiesener Speicher und Slack Space
+    - freie Cluster
+    - File Slack
+    - Dateifragmente
+    - File Carving
+## Timeline-Erstellung
+    - Auswertung der Verzeichniseinträge
+    - eingeschränkte Aussagekraft der Zeitstempel
