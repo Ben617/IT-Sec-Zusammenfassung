@@ -8,68 +8,70 @@
 ## Zentrale Strukturen:
 Zunächst wird die Partitionstabelle des Datenträgerabbilds untersucht. Dadurch lässt sich feststellen, unter welcher Partitionsnummer die FAT-Partition geführt wird und bei welchem Sektor sie beginnt.
 
-        ```bash
-        mmls EDF.dd
-        ```
+```bash
+mmls EDF.dd
+```
+![]()
 
 Die gewünschte Partitionsnummer und ihr Startsektor werden anschließend in Variablen eingetragen:
 
-        ![]()
+![]()
 
-        ```bash
-        PARTITION=2
-        STARTSEKTOR=2048
-        ```
-        Die ausgewählte Partition kann mit `mmcat` aus dem Datenträgerabbild extrahiert werden:
+```bash
+PARTITION=2
+STARTSEKTOR=2048
+```
+Die ausgewählte Partition kann mit `mmcat` aus dem Datenträgerabbild extrahiert werden:
 
-        ```bash
-        mmcat EDF.dd "$PARTITION" > partition.dd
-        ```
+```bash
+mmcat EDF.dd "$PARTITION" > partition.dd
+```
 
-        Anschließend zeigt `fsstat` die zentralen Strukturen des enthaltenen Dateisystems an. Dazu gehören unter anderem die Position des Bootsektors, die FAT-Bereiche, die Anzahl der FAT-Kopien, das Root-Verzeichnis und der Datenbereich.
+Anschließend zeigt `fsstat` die zentralen Strukturen des enthaltenen Dateisystems an. Dazu gehören unter anderem die Position des Bootsektors, die FAT-Bereiche, die Anzahl der FAT-Kopien, das Root-Verzeichnis und der Datenbereich.
 
-        ```bash
-        fsstat partition.dd
-        ```
+```bash
+fsstat partition.dd
+```
 
-        ![]()
+![]()
 
 
 
 
 
 - Bootsektor
-        Der Bootsektor befindet sich am Anfang der FAT-Partition. Er enthält neben Startcode und Dateisysteminformationen auch den BIOS Parameter Block. Um den Bootsektor aus der bereits extrahierten Partition zu kopieren, werden die ersten 512 Byte ausgelesen:
+Der Bootsektor befindet sich am Anfang der FAT-Partition. Er enthält neben Startcode und Dateisysteminformationen auch den BIOS Parameter Block. Um den Bootsektor aus der bereits extrahierten Partition zu kopieren, werden die ersten 512 Byte ausgelesen:
 
-        ```bash
-        dd if=partition.dd of=bootsektor.bin bs=512 count=1 status=none
-        ```
+```bash
+dd if=partition.dd of=bootsektor.bin bs=512 count=1 status=none
+```
 
-
+todo
 
 - BIOS Parameter Block (BPB)
-        Der BIOS Parameter Block beginnt bei Byte 11 beziehungsweise am Offset `0x0B` des Bootsektors. Er enthält die Parameter, aus denen die Lage und Größe der übrigen Dateisystembereiche berechnet werden. Dazu gehören unter anderem die Sektorgröße, die Anzahl reservierter Sektoren, die Anzahl der FAT-Kopien und die Größe einer FAT.
+Der BIOS Parameter Block beginnt bei Byte 11 beziehungsweise am Offset `0x0B` des Bootsektors. Er enthält die Parameter, aus denen die Lage und Größe der übrigen Dateisystembereiche berechnet werden. Dazu gehören unter anderem die Sektorgröße, die Anzahl reservierter Sektoren, die Anzahl der FAT-Kopien und die Größe einer FAT.
 
-        Der relevante Bereich kann mit `xxd` hervorgehoben ausgegeben werden:
-        ```bash
-        mmcat EDF.dd partition
-        ```
-        ![]()
-
-
-        ```bash
-        xxd -g 1 -s 11 -l 79 bootsektor.bin
-        ```
-        ![]()
+Der relevante Bereich kann mit `xxd` hervorgehoben ausgegeben werden:
+```bash
+mmcat EDF.dd partition
+```
+![]()
 
 
-        Eine leichter lesbare Interpretation der im BPB gespeicherten Werte liefert:
+```bash
+xxd -g 1 -s 11 -l 79 bootsektor.bin
+```
+![]()
 
-        ```bash
-        fsstat partition.dd
-        ```
-        ![]()
 
+Eine leichter lesbare Interpretation der im BPB gespeicherten Werte liefert:
+
+```bash
+fsstat partition.dd
+```
+![]()
+
+todo auswertung
 
 
 
